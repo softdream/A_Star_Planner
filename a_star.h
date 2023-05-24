@@ -76,7 +76,7 @@ struct Euclidean
 
 	static ValueType distance( const MapPoseType& src, const MapPoseType& dst ) 
 	{
-		return static_cast<ValueType>( ( src - dst ).norm() );
+		return ( src.cast<T>() - dst.cast<T>() ).norm();
 	}
 };
 
@@ -190,8 +190,9 @@ public:
 		std::cout<<"current_node.pose = "<<current_node->pose.transpose()<<std::endl;
 	
 		while ( current_node != nullptr ) {
-			std::cout<<"current_node.pose = "<<current_node->pose.transpose()<<std::endl;
-
+			//std::cout<<"current_node.pose = "<<current_node->pose.transpose()<<std::endl;
+		
+			path_.push_back( current_node->pose );
 			current_node = current_node->parent;
 		}	
 	}
